@@ -1,6 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
-import { View } from 'react-native';
+
+import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Tabs from './Components/Tabs';
+
 
 import HomeScreen from './Pages/HomeScreen';
 
@@ -9,7 +11,10 @@ export default function App() {
     
 
     <SafeAreaProvider>
-      <HomeScreen/>
+    <NavigationContainer>
+      <Tabs/>
+    </NavigationContainer>
+    
       
     </SafeAreaProvider>
     

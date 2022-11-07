@@ -1,31 +1,27 @@
-import home from "./assets/home.png"
-import search  from "./assets/search .png"
-import short from "./assets/short.png"
-import stockmarket from "./assets/stockmarket.png"
-import send from "./assets/send.png"
+
 
 export const icons=[
     {
         name:"home",
-        source:{home}
+        source:"https://cdn-icons-png.flaticon.com/512/1946/1946433.png"
         
     },
     {
         name:"search",
-        source:{search}
+        source:"https://cdn-icons-png.flaticon.com/512/2811/2811806.png"
     },
     {
         name:"reels",
-        source:{short}
+        source:"https://cdn-icons-png.flaticon.com/512/8359/8359686.png"
 
     },
     {
         name:"market",
-        source:{stockmarket}
+        source:"https://cdn-icons-png.flaticon.com/512/869/869687.png"
     }
     ,
     {
         name:"profile",
-        source:{send}
+        source:"https://cdn-icons-png.flaticon.com/512/869/869687.png"
     }
 ]

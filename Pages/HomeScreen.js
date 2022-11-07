@@ -6,7 +6,7 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+
 import Header from "../Components/Header";
 import React from "react";
 import Stories from "../Components/Stories";
@@ -21,7 +21,6 @@ const HomeScreen = () => {
         <Stories />
         <Posts />
       </ScrollView>
-      <FooteBar />
     </View>
   );
 };
