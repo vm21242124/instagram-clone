@@ -77,6 +77,11 @@ export const post = [
         commentmessage:
           "such a buetifull qute brother you will be our partener soon",
       },
+      {
+        commentuser: "sundar pichai",
+        commentmessage:
+          "such a buetifull qute brother you will be our partener soon",
+      },
     ],
   },
   {
@@ -86,7 +91,7 @@ export const post = [
     postimg:
       "https://imgs.search.brave.com/uJ2GZ1Hm8hjZbeNACW2N-ZHtJ2NNHhp_5qxLkvj77F8/rs:fit:711:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC45/UVFWQXhmNzFGVllp/b1BuUmcxaHJRSGFF/OCZwaWQ9QXBp",
     dis: "this is a vinod mali post",
-    likes: 101,
+    likes: 1014,
     comment: [
       {
         commentuser: "sundar pichai",

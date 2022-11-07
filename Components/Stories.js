@@ -8,10 +8,11 @@ const Stories = () => {
   return (
     <View style={story.container}>
       <Text style={story.head}>Stories</Text>
+
       <ScrollView horizontal={true}>
         <View style={story.stories}>
-          {storyuser.map((s) => (
-            <Story name={s.username} image={s.profilephoto} />
+          {storyuser.map((s, index) => (
+            <Story key={index} name={s.username} image={s.profilephoto} />
           ))}
         </View>
       </ScrollView>
@@ -20,21 +21,19 @@ const Stories = () => {
 };
 const story = StyleSheet.create({
   container: {
-   display:"flex",
-  height:130,
-  borderWidth:0.5,
-  borderBottomColor:"white"
-
+    display: "flex",
+    height: 130,
+    borderWidth: 0.5,
+    borderBottomColor: "white",
   },
   head: {
     color: "white",
     fontSize: 15,
-    marginBottom:10,
-    marginLeft:10
-    
+    marginBottom: 10,
+    marginLeft: 10,
   },
   stories: {
-    marginLeft:10,
+    marginLeft: 10,
     display: "flex",
     flexDirection: "row",
   },
