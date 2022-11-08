@@ -1,10 +1,13 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 
 const Story = ({ name, image }) => {
   return (
     <View style={story.div}>
+      <TouchableOpacity>
+
       <Image style={story.img} source={{ uri: image }} />
+      </TouchableOpacity>
 
       <Text style={{ color: "white" }}>{name}</Text>
     </View>

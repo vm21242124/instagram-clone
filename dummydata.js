@@ -1,9 +1,5 @@
 export const storyuser = [
-  {
-    username: "vm2124",
-    profilephoto:
-      "https://imgs.search.brave.com/uJ2GZ1Hm8hjZbeNACW2N-ZHtJ2NNHhp_5qxLkvj77F8/rs:fit:711:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC45/UVFWQXhmNzFGVllp/b1BuUmcxaHJRSGFF/OCZwaWQ9QXBp",
-  },
+ 
   {
     username: "shahruk khan",
     profilephoto:
@@ -15,11 +11,7 @@ export const storyuser = [
       "https://imgs.search.brave.com/opuRiS6XPY710khKlRYn2G1UUbVVlcXE9pjJRfDhQ8w/rs:fit:309:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5l/cERXRzh0Um1RZVdH/VWo1YXR5dDl3SGFM/VyZwaWQ9QXBp",
   },
 
-  {
-    username: "vm2124",
-    profilephoto:
-      "https://imgs.search.brave.com/uJ2GZ1Hm8hjZbeNACW2N-ZHtJ2NNHhp_5qxLkvj77F8/rs:fit:711:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC45/UVFWQXhmNzFGVllp/b1BuUmcxaHJRSGFF/OCZwaWQ9QXBp",
-  },
+
   {
     username: "shahruk khan",
     profilephoto:
@@ -30,11 +22,7 @@ export const storyuser = [
     profilephoto:
       "https://imgs.search.brave.com/opuRiS6XPY710khKlRYn2G1UUbVVlcXE9pjJRfDhQ8w/rs:fit:309:225:1/g:ce/aHR0cHM6Ly90c2Ux/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5l/cERXRzh0Um1RZVdH/VWo1YXR5dDl3SGFM/VyZwaWQ9QXBp",
   },
-  {
-    username: "vm2124",
-    profilephoto:
-      "https://imgs.search.brave.com/uJ2GZ1Hm8hjZbeNACW2N-ZHtJ2NNHhp_5qxLkvj77F8/rs:fit:711:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC45/UVFWQXhmNzFGVllp/b1BuUmcxaHJRSGFF/OCZwaWQ9QXBp",
-  },
+
   {
     username: "shahruk khan",
     profilephoto:

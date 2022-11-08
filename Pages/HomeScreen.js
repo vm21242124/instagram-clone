@@ -11,7 +11,7 @@ import Header from "../Components/Header";
 import React from "react";
 import Stories from "../Components/Stories";
 import Posts from "../Components/Posts";
-import FooteBar from "../Components/FooteBar";
+
 
 const HomeScreen = () => {
   return (
