@@ -11,6 +11,7 @@ import heart from "../assets/heart.png";
 import short from "../assets/short.png";
 import Profilepage from "../Pages/Profilepage";
 import Newpost from "../Pages/Newpost";
+
 const Tabs = () => {
   const tab = createBottomTabNavigator();
   return (
@@ -20,8 +21,12 @@ const Tabs = () => {
         tabBarInactiveBackgroundColor: "black",
         headerShown: false,
         showLabel: false,
+        
       }}
+      initialRouteName="login"
     >
+      
+       
       <tab.Screen
         name="Home"
         component={HomeScreen}

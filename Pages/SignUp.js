@@ -11,16 +11,14 @@ import React from "react";
 import { Formik } from "formik";
 import instagramlogo from "../assets/instagramlogo.png";
 
-const LoginScreen = () => {
+const SignUp = () => {
   return (
     <View style={style.safeview}>
       <View style={style.container}>
         <Image style={style.logo} source={instagramlogo} />
         <Formik
-          initialValues={{ email: "", password: "" }}
-          onSubmit={(values) =>
-            console.log(values.email ,values.password)
-          }
+          initialValues={{ email: "", password: "" ,Name:""}}
+          onSubmit={(values) => console.log(values.email ,values.Name ,values.password)}
         >
           {({ handleChange, handleSubmit, handleBlur, values }) => (
             <View style={style.loginform}>
@@ -31,6 +29,14 @@ const LoginScreen = () => {
                 onChangeText={handleChange("email")}
                 onBlur={handleBlur("email")}
                 value={values.email}
+              />
+              <TextInput
+                style={style.inp}
+                placeholder="Name"
+                placeholderTextColor={"white"}
+                onChangeText={handleChange("Name")}
+                onBlur={handleBlur("Name")}
+                value={values.Name}
               />
               <TextInput
                 style={style.inp}
@@ -45,10 +51,10 @@ const LoginScreen = () => {
               </TouchableOpacity>
               <View style={style.tag}>
                 <Text style={{ color: "white" }}>
-                  Don't have an account ?{" "}
+                  Already Have an account ?{" "}
                   <TouchableOpacity>
                     <Text style={{ color: "blue", fontWeight: "600" }}>
-                      SignUp
+                      SignIn
                     </Text>
                   </TouchableOpacity>
                 </Text>
@@ -61,8 +67,7 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
-
+export default SignUp;
 const style = StyleSheet.create({
   tag: {
     display: "flex",

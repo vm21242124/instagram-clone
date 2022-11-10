@@ -6,6 +6,7 @@ import Tabs from './Components/Tabs';
 
 
 import LoginScreen from './Pages/LoginScreen'
+import SignUp from './Pages/SignUp';
 
 export default function App() {
   const [isSignup,seIsSignup]=useState(false)
@@ -14,9 +15,11 @@ export default function App() {
 
     <SafeAreaProvider>
     <NavigationContainer >
+      {/* <Tabs/> */}
       {isSignup ?
       <Tabs/> :
-      <LoginScreen/>
+      // <LoginScreen/>
+      <SignUp/>
       
     }
     </NavigationContainer>
