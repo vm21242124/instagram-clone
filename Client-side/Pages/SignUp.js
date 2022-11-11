@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import React from "react";
 import { Formik } from "formik";
+import axios from "react-native-axios";
 import instagramlogo from "../assets/instagramlogo.png";
 
 const SignUp = () => {
@@ -17,14 +18,48 @@ const SignUp = () => {
       <View style={style.container}>
         <Image style={style.logo} source={instagramlogo} />
         <Formik
-          initialValues={{ email: "", password: "" ,Name:""}}
-          onSubmit={(values) => console.log(values.email ,values.Name ,values.password)}
+          initialValues={{
+            email: "",
+            password: "",
+            name: "",
+            phone: "",
+            username: "",
+          }}
+          onSubmit={(values) => {
+            const user = {
+              email: values.email,
+              name: values.name,
+              phone: values.phone,
+              password: values.password,
+              username: values.username,
+            };
+            axios
+              .post(`http://localhost:8800/auth/register`, { user })
+              .then((res) => {
+                console.log(res);
+                console.log(res.data);
+              });
+
+            // email:values.email,
+            // name:values.name,
+            // phone:values.phone,
+            // password:values.password,
+            // username:values.username
+          }}
         >
           {({ handleChange, handleSubmit, handleBlur, values }) => (
             <View style={style.loginform}>
               <TextInput
                 style={style.inp}
-                placeholder="Phone number,email or username"
+                placeholder="Name"
+                placeholderTextColor={"white"}
+                onChangeText={handleChange("name")}
+                onBlur={handleBlur("name")}
+                value={values.name}
+              />
+              <TextInput
+                style={style.inp}
+                placeholder="email"
                 placeholderTextColor={"white"}
                 onChangeText={handleChange("email")}
                 onBlur={handleBlur("email")}
@@ -32,12 +67,22 @@ const SignUp = () => {
               />
               <TextInput
                 style={style.inp}
-                placeholder="Name"
+                placeholder="username"
                 placeholderTextColor={"white"}
-                onChangeText={handleChange("Name")}
-                onBlur={handleBlur("Name")}
-                value={values.Name}
+                onChangeText={handleChange("username")}
+                onBlur={handleBlur("username")}
+                value={values.username}
               />
+              <TextInput
+                style={style.inp}
+                placeholder="phone"
+                placeholderTextColor={"white"}
+                onChangeText={handleChange("phone")}
+                onBlur={handleBlur("phone")}
+                value={values.phone}
+                keyboardType="number-pad"
+              />
+
               <TextInput
                 style={style.inp}
                 placeholder="Password"
