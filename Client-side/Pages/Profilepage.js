@@ -7,8 +7,12 @@ import {
   Button,
 } from "react-native";
 import React from "react";
+import { useSelector } from "react-redux";
+
 
 const Profilepage = () => {
+  const user=useSelector((state)=>state.user[0])
+
   return (
     <View style={style.safeview}>
       <View style={style.cover}>
@@ -27,7 +31,7 @@ const Profilepage = () => {
       </View>
       <View style={style.userinfo}>
         <Text style={{ color: "white", fontWeight: "700", fontSize: 20 }}>
-          vm2124
+          {user?.name}
         </Text>
         <Text style={{ color: "white", fontWeight: "200", fontSize: 15 }}>
           every thing will be possible when you are tying from bottom

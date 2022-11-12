@@ -7,12 +7,34 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import axios from "react-native-axios";
+import * as Yup from "yup";
 import instagramlogo from "../assets/instagramlogo.png";
 
-const SignUp = () => {
+const SignUp = ({ navigation }) => {
+  const signupSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(2, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required"),
+    username: Yup.string()
+      .min(3, "Too Short!")
+      .max(15, "Too Long!")
+      .required("Required"),
+    phone: Yup.string()
+      .min(10, "Too Short!")
+      .max(10, "Too Long!")
+      .required("Required"),
+    password: Yup.string()
+      .min(6, "Too Short!")
+      .max(20, "Too Long!")
+      .required("Required"),
+    email: Yup.string().email("Invalid email").required("Required"),
+  });
+  const [loading, setLoading] = useState(false);
+  
   return (
     <View style={style.safeview}>
       <View style={style.container}>
@@ -25,14 +47,10 @@ const SignUp = () => {
             phone: "",
             username: "",
           }}
+          validationSchema={signupSchema}
           onSubmit={(values) => {
-            // console.log(
-            //   values.email,
-            //   values.name,
-            //   values.phone,
-            //   values.password,
-            //   values.username
-            // );
+            setLoading(true);
+
             axios
               .post(
                 "https://instagram-clone-server-side.onrender.com/auth/register",
@@ -45,20 +63,24 @@ const SignUp = () => {
                 }
               )
               .then((res) => {
-                console.log(res);
-                // console.log(res.data);
+                alert("registration success");
+                navigation.navigate("login");
+                // console.log(res.status);
+                setLoading(false);
               })
-
-            // email:values.email,
-            // name:values.name,
-            // phone:values.phone,
-            // password:values.password,
-            // username:values.username
+              .catch((error) => {
+                if (error.response.status === 403) {
+                  alert("you have already registered login now");
+                  navigation.navigate("login")
+                }
+                console.log(error);
+                setLoading(false);
+              });
           }}
         >
-          {({ handleChange, handleSubmit, handleBlur, values }) => (
+          {({ handleChange, handleSubmit, handleBlur, values ,errors,touched }) => (
             <View style={style.loginform}>
-              <TextInput
+              <TextInput name="name"
                 style={style.inp}
                 placeholder="Name"
                 placeholderTextColor={"white"}
@@ -66,7 +88,12 @@ const SignUp = () => {
                 onBlur={handleBlur("name")}
                 value={values.name}
               />
+              {errors.name && touched.name ? (
+                <Text style={{color:"white",fontSize:10}}>{errors.name}</Text>
+              ) : null}
               <TextInput
+              name="email"
+              type="email"
                 style={style.inp}
                 placeholder="email"
                 placeholderTextColor={"white"}
@@ -74,7 +101,11 @@ const SignUp = () => {
                 onBlur={handleBlur("email")}
                 value={values.email}
               />
+              {errors.email && touched.email ? (
+                <Text style={{color:"white",fontSize:10}}>{errors.email}</Text>
+              ) : null}
               <TextInput
+              name="username"
                 style={style.inp}
                 placeholder="username"
                 placeholderTextColor={"white"}
@@ -82,7 +113,11 @@ const SignUp = () => {
                 onBlur={handleBlur("username")}
                 value={values.username}
               />
+              {errors.username && touched.username ? (
+                <Text style={{color:"white",fontSize:10}}>{errors.username}</Text>
+              ) : null}
               <TextInput
+              name="phone"
                 style={style.inp}
                 placeholder="phone"
                 placeholderTextColor={"white"}
@@ -91,22 +126,37 @@ const SignUp = () => {
                 value={values.phone}
                 keyboardType="number-pad"
               />
+              {errors.phone && touched.phone ? (
+                <Text style={{color:"white",fontSize:10}}>{errors.phone}</Text>
+              ) : null}
 
               <TextInput
+              name="password"
                 style={style.inp}
                 placeholder="Password"
                 placeholderTextColor={"white"}
+                password={true}
+                secureTextEntry={true}
                 onChangeText={handleChange("password")}
                 onBlur={handleBlur("password")}
                 value={values.password}
               />
+              {errors.password && touched.password ? (
+                <Text style={{color:"white",fontSize:10}}>{errors.password}</Text>
+              ) : null}
               <TouchableOpacity>
-                <Button onPress={handleSubmit} title="Signup" />
+                <Button
+                  disabled={loading}
+                  onPress={handleSubmit}
+                  title={loading ? "loading..." : "signUp"}
+                />
               </TouchableOpacity>
               <View style={style.tag}>
                 <Text style={{ color: "white" }}>
                   Already Have an account ?{" "}
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("login")}
+                  >
                     <Text style={{ color: "blue", fontWeight: "600" }}>
                       signIn
                     </Text>
