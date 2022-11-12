@@ -26,19 +26,28 @@ const SignUp = () => {
             username: "",
           }}
           onSubmit={(values) => {
-            const user = {
-              email: values.email,
-              name: values.name,
-              phone: values.phone,
-              password: values.password,
-              username: values.username,
-            };
+            // console.log(
+            //   values.email,
+            //   values.name,
+            //   values.phone,
+            //   values.password,
+            //   values.username
+            // );
             axios
-              .post(`http://localhost:8800/auth/register`, { user })
+              .post(
+                "https://instagram-clone-server-side.onrender.com/auth/register",
+                {
+                  email: values.email,
+                  name: values.name,
+                  phone: values.phone,
+                  password: values.password,
+                  username: values.username,
+                }
+              )
               .then((res) => {
                 console.log(res);
-                console.log(res.data);
-              });
+                // console.log(res.data);
+              })
 
             // email:values.email,
             // name:values.name,
@@ -92,14 +101,14 @@ const SignUp = () => {
                 value={values.password}
               />
               <TouchableOpacity>
-                <Button onPress={handleSubmit} title="Login" />
+                <Button onPress={handleSubmit} title="Signup" />
               </TouchableOpacity>
               <View style={style.tag}>
                 <Text style={{ color: "white" }}>
                   Already Have an account ?{" "}
                   <TouchableOpacity>
                     <Text style={{ color: "blue", fontWeight: "600" }}>
-                      SignIn
+                      signIn
                     </Text>
                   </TouchableOpacity>
                 </Text>
