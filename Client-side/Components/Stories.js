@@ -11,8 +11,12 @@ import add from "../assets/add.png";
 import React from "react";
 import { storyuser } from "../dummydata";
 import Story from "./Story";
+import { useSelector } from "react-redux";
+import profile from '../assets/profile.png'
 
 const Stories = () => {
+  const user=useSelector((state)=>state.user[0])
+ 
   return (
     <View style={story.container}>
       <Text style={story.head}>Stories</Text>
@@ -23,14 +27,12 @@ const Stories = () => {
             <TouchableOpacity>
               <Image
                 style={story.img}
-                source={{
-                  uri: "https://imgs.search.brave.com/uJ2GZ1Hm8hjZbeNACW2N-ZHtJ2NNHhp_5qxLkvj77F8/rs:fit:711:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC45/UVFWQXhmNzFGVllp/b1BuUmcxaHJRSGFF/OCZwaWQ9QXBp",
-                }}
+                source={user?.profilepic?{uri:user.profilepic}:profile}
               />
             </TouchableOpacity>
             <Image style={story.plus} source={add} />
 
-            <Text style={{ color: "white" }}>vm2124</Text>
+            <Text style={{ color: "white" }}>{user?.username}</Text>
           </View>
           {storyuser.map((s, index) => (
             <Story key={index} name={s.username} image={s.profilephoto} />

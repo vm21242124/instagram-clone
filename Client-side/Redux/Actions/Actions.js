@@ -1,4 +1,4 @@
-import { LOG_OUT, SET_USER } from "../ActionsType/ActionsTypes"
+import { UPDATE_USER, SET_USER } from "../ActionsType/ActionsTypes"
 
 export const set_user=(payload)=>{
     
@@ -9,7 +9,9 @@ export const set_user=(payload)=>{
 
    
 }
-export const logout_user=index=>({
-    type:LOG_OUT,
-    payload:index
-});
+export const update_user=(payload)=>{
+    return{
+        type:UPDATE_USER,
+        payload
+    }
+}

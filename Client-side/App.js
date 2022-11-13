@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import SignUp from "./Pages/SignUp";
 import LoginScreen from "./Pages/LoginScreen";
 import { mystore } from "./Redux/Store/Store";
+import UpdateUser from "./Pages/UpdateUser";
 const stack = createStackNavigator();
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
             <stack.Screen name="home" component={Tabs} />
             <stack.Screen name="login" component={LoginScreen} />
             <stack.Screen name="signup" component={SignUp} />
+            <stack.Screen name="updateuser" component={UpdateUser}/>
           </stack.Navigator>
         </NavigationContainer>
       </Provider>

@@ -8,25 +8,35 @@ import {
 } from "react-native";
 import React from "react";
 import { useSelector } from "react-redux";
+import profile from "../assets/profile.png";
 
-
-const Profilepage = () => {
-  const user=useSelector((state)=>state.user[0])
+const Profilepage = ({ navigation }) => {
+  const user = useSelector((state) => state.user[0]);
 
   return (
     <View style={style.safeview}>
       <View style={style.cover}>
         <Image
           style={style.coverimg}
-          source={{
-            uri: "https://imgs.search.brave.com/uJ2GZ1Hm8hjZbeNACW2N-ZHtJ2NNHhp_5qxLkvj77F8/rs:fit:711:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC45/UVFWQXhmNzFGVllp/b1BuUmcxaHJRSGFF/OCZwaWQ9QXBp",
-          }}
+          source={
+            user?.coverPic
+              ? {
+                  uri: user.coverPic,
+                }
+              : {
+                  uri: "https://imgs.search.brave.com/uJ2GZ1Hm8hjZbeNACW2N-ZHtJ2NNHhp_5qxLkvj77F8/rs:fit:711:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC45/UVFWQXhmNzFGVllp/b1BuUmcxaHJRSGFF/OCZwaWQ9QXBp",
+                }
+          }
         />
         <Image
           style={style.profileimg}
-          source={{
-            uri: "https://imgs.search.brave.com/uJ2GZ1Hm8hjZbeNACW2N-ZHtJ2NNHhp_5qxLkvj77F8/rs:fit:711:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC45/UVFWQXhmNzFGVllp/b1BuUmcxaHJRSGFF/OCZwaWQ9QXBp",
-          }}
+          source={
+            user?.profilepic
+              ? {
+                  uri: user.profilepic,
+                }
+              : profile
+          }
         />
       </View>
       <View style={style.userinfo}>
@@ -34,43 +44,64 @@ const Profilepage = () => {
           {user?.name}
         </Text>
         <Text style={{ color: "white", fontWeight: "200", fontSize: 15 }}>
-          every thing will be possible when you are tying from bottom
+          {user?.bio}
         </Text>
       </View>
       <View style={style.follow}>
-        <View style={{alignItems:"center"}}>
-          <Text style={{ color: "white", fontWeight: "700", fontSize: 20 ,marginBottom:10 }}>
+        <View style={{ alignItems: "center" }}>
+          <Text
+            style={{
+              color: "white",
+              fontWeight: "700",
+              fontSize: 20,
+              marginBottom: 10,
+            }}
+          >
             Total Post
           </Text>
           <Text style={{ color: "white", fontWeight: "400", fontSize: 15 }}>
             0
           </Text>
         </View>
-        <View style={{alignItems:"center"}}>
-          <Text style={{ color: "white", fontWeight: "700", fontSize: 20  ,marginBottom:10 }}>
+        <View style={{ alignItems: "center" }}>
+          <Text
+            style={{
+              color: "white",
+              fontWeight: "700",
+              fontSize: 20,
+              marginBottom: 10,
+            }}
+          >
             Follower
           </Text>
           <Text style={{ color: "white", fontWeight: "400", fontSize: 15 }}>
-            550
+          {user.followers.length}
           </Text>
         </View>
-        <View style={{alignItems:"center"}}>
-          <Text style={{ color: "white", fontWeight: "700", fontSize: 20  ,marginBottom:10}}>
+        <View style={{ alignItems: "center" }}>
+          <Text
+            style={{
+              color: "white",
+              fontWeight: "700",
+              fontSize: 20,
+              marginBottom: 10,
+            }}
+          >
             Following
           </Text>
           <Text style={{ color: "white", fontWeight: "400", fontSize: 15 }}>
-            50
+            {user.followings.length}
           </Text>
         </View>
       </View>
       <TouchableOpacity>
         <Button
+          onPress={() => navigation.navigate("updateuser")}
           title="edit profile"
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
         />
       </TouchableOpacity>
-      
     </View>
   );
 };
