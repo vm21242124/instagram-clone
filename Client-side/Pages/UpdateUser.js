@@ -93,7 +93,7 @@ const UpdateUser = ({ navigation }) => {
                 setLoading(false);
                 alert("update success you have to login again to view the changes");
 
-                navigation.navigate("login");
+                navigation.navigate("home");
                 console.log(res.data);
              
               })

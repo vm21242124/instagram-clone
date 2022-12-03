@@ -7,82 +7,132 @@ import {
   TextInput,
   Button,
 } from "react-native";
-import React from "react";
-import gallary from "../assets/gallary.png";
-import camera from "../assets/camera.png";
-import placeholder from "../assets/placeholder.png";
-import video from "../assets/video.png";
-
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import profile from "../assets/profile.png";
+import back from "../assets/back.png";
+import { Formik } from "formik";
+import axios from "axios";
 const Newpost = () => {
+  const user = useSelector((state) => state.user[0]);
+  const [loading,setLoading]=useState(false)
   return (
     <View style={style.safeview}>
-      <Text style={{ color: "white" }}>Newpost</Text>
+      <View style={style.header}>
+        <Image style={style.back} source={back} />
+        <Text style={{ color: "white", fontWeight: "700", fontSize: 15 }}>
+          Back
+        </Text>
+      </View>
       <View style={style.profile}>
         <TouchableOpacity>
           <Image
             style={style.profileimg}
-            source={{
-              uri: "https://imgs.search.brave.com/uJ2GZ1Hm8hjZbeNACW2N-ZHtJ2NNHhp_5qxLkvj77F8/rs:fit:711:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC45/UVFWQXhmNzFGVllp/b1BuUmcxaHJRSGFF/OCZwaWQ9QXBp",
-            }}
+            source={user?.profilepic ? { uri: user.profilepic } : profile}
           />
         </TouchableOpacity>
         <TouchableOpacity>
-          <Text style={{ color: "white", fontWeight: "700", fontSize: 20 }}>
-            vm2124
+          <Text style={{ color: "white", fontWeight: "700", fontSize: 15 }}>
+            {user.name}
           </Text>
         </TouchableOpacity>
       </View>
-      <View style={style.box}>
-        <TextInput
-          placeholder="what'in your mind?"
-          numberOfLines={4}
-          style={style.dis}
-        />
-      </View>
-      <View style={{ marginBottom: 20 }}>
-        <Text style={{ color: "white", margin: 10, fontSize: 15 }}>
-          Add More
-        </Text>
-        <View style={style.icons}>
-          <TouchableOpacity>
-            <Image style={style.icon} source={gallary} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image style={style.icon} source={camera} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image style={style.icon} source={placeholder} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image
-              style={{
-                tintColor: "#748c94",
-                width: 30,
-                height: 30,
-                resizeMode: "contain",
-              }}
-              source={video}
+      <Formik
+        initialValues={{ dis: "", imgurl: "" }}
+        onSubmit={(values) => {
+          // console.log(values.dis, values.imgurl);
+          setLoading(true)
+          axios.post(
+            "https://instagram-clone-server-side.onrender.com/post/newpost",
+            { userId: user._id, desc: values.dis, image: values.imgurl }
+          ).then((res)=>{
+            setLoading(false)
+            alert("post successfull")
+
+          }).catch((e)=>{
+            setLoading(false)
+            alert(e)
+          })
+        }}
+      >
+        {({ handleChange, handleSubmit, handleBlur, values }) => (
+          <View style={style.postform}>
+            <TextInput
+              name="dis"
+              style={style.inp}
+              placeholder="Enter some dis..."
+              placeholderTextColor={"white"}
+              onChangeText={handleChange("dis")}
+              onBlur={handleBlur("dis")}
+              value={values.dis}
             />
-          </TouchableOpacity>
-        </View>
-      </View>
-      <TouchableOpacity>
-        <Button
-          title="post"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"
-        />
-      </TouchableOpacity>
+            <TextInput
+              name="imgurl"
+              style={style.inp}
+              placeholder="add image link"
+              placeholderTextColor={"white"}
+              onChangeText={handleChange("imgurl")}
+              onBlur={handleBlur("imgurl")}
+              value={values.imgurl}
+            />
+            <View style={style.preview}>
+              {values.imgurl ? (
+                <Image style={style.img} source={{ uri: values.imgurl }} />
+              ) : (
+                <Text style={style.tex}>No Image Found 📪</Text>
+              )}
+            </View>
+
+            <TouchableOpacity>
+              <Button disabled={loading} onPress={handleSubmit} title={loading?"posting...":"Post"} />
+            </TouchableOpacity>
+          </View>
+        )}
+      </Formik>
     </View>
   );
 };
 
 export default Newpost;
 const style = StyleSheet.create({
-  icons: {
+  tex: {
+    color: "white",
+    fontSize: 15,
+  },
+  img: { width: "90%", height: "90%", resizeMode: "contain" },
+  back: {
+    marginLeft: 10,
+    width: 40,
+    height: 40,
+    resizeMode: "contain",
+    marginRight: 10,
+  },
+  header: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  preview: {
+    display: "flex",
+    width: "100%",
+    height: "60%",
+    backgroundColor: "gray",
+    marginBottom: 15,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  postform: {
+    display: "flex",
+    alignItems: "stretch",
+  },
+  inp: {
+    backgroundColor: "gray",
+    fontWeight: "200",
+    color: "white",
+    height: 50,
+    borderRadius: 10,
+    paddingLeft: 15,
+    marginBottom: 10,
   },
   box: {
     display: "flex",
@@ -104,11 +154,7 @@ const style = StyleSheet.create({
     alignItems: "center",
     marginTop: 20,
   },
-  icon: {
-    width: 30,
-    height: 30,
-    resizeMode: "contain",
-  },
+
   profileimg: {
     width: 50,
     resizeMode: "contain",
